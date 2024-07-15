@@ -21,6 +21,8 @@ function loading() {
 
 generateTicket.addEventListener('click', function () {
     loading();
+    // una volta raccolti i valori degli input fai le verifiche e metti gli eventuali errori
+    // degli utenti
 })
 
 
