@@ -1,6 +1,6 @@
 const loadText = document.querySelector('.loading-text');
 const bg = document.querySelector('.bg');
-const button = document.querySelector('button');
+const generateTicket = document.querySelector('.generate-ticket');
 function scale(number, inMin, inMax, outMin, outMax) {
     return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
@@ -19,7 +19,7 @@ function loading() {
     }
 }
 
-button.addEventListener('click', function () {
+generateTicket.addEventListener('click', function () {
     loading();
 })
 
