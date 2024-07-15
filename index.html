@@ -21,6 +21,24 @@
 <body>
     <header>
         <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+            <div class="section-form mt-3">
+                <div class="nome">
+                    <label for="name">Inserisci il Nome</label>
+                    <input type="text" id="name" placeholder="Nome">
+                </div>
+                <div class="d-none cognome">
+                    <label for="last-name">Inserisci il Cognome</label>
+                    <input type="text" id="last-name" placeholder="Cognome">
+                </div>
+                <div class="d-none età">
+                    <label for="age">Inserisci gli Anni</label>
+                    <input type="number" min="7" max="100" id="age" placeholder="Età">
+                </div>
+                <div class="d-none distanza">
+                    <label for="km">Inserisci quanti Km vuoi percorre</label>
+                    <input type="number" min="1" id="km" placeholder="Km">
+                </div>
+            </div>
             <div class="progress-container d-flex justify-content-center align-items-center mt-3 gap-3">
                 <div class="progresss" id="progress"></div>
                 <div class="circle active">1</div>
@@ -28,10 +46,9 @@
                 <div class="circle">3</div>
                 <div class="circle">4</div>
             </div>
-            <!-- occupati dei colori e delle forme dei bottoni con le classi di bootstrap sistemale nel js -->
             <div class="button">
-                <button class="btn" id="prev" disabled>Prev</button>
-                <button class="btn" id="next">Next</button>
+                <button class="btn text-black bg-secondary" id="prev" disabled>Prev</button>
+                <button class="btn text-white bg-primary" id="next">Next</button>
             </div>
         </div>
     </header>
