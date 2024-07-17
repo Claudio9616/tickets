@@ -1,3 +1,6 @@
+const loadText = document.querySelector('.loading-text');
+const bg = document.querySelector('.bg');
+const generateTicket = document.querySelector('.generate-ticket');
 const progress = document.getElementById('progress');
 const prev = document.getElementById('prev');
 const next = document.getElementById('next');
@@ -10,8 +13,29 @@ const age = document.getElementById('age');
 const età = document.querySelector('.età');
 const km = document.getElementById('km');
 const distanza = document.querySelector('.distanza');
+function scale(number, inMin, inMax, outMin, outMax) {
+    return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+function loading() {
+    let load = 0;
+    let intervall = setInterval(bluring, 30);
+    function bluring() {
+        bg.classList.remove('d-none')
+        load++;
+        if (load > 99) {
+            clearInterval(intervall);
+        }
+        loadText.innerHTML = `${load}%`
+        loadText.style.opacity = scale(load, 0, 100, 1, 0);
+        bg.style.filter = `blur(${scale(load, 0, 100, 50, 0)}px)`;
+    }
+}
 
-
+generateTicket.addEventListener('click', function () {
+    loading();
+    // una volta raccolti i valori degli input fai le verifiche e metti gli eventuali errori
+    // degli utenti
+})
 // PER QUANDO DEVO PRENDERE I VALORI DEGLI INPUT
 // const user = {
 //     nome: name.value.trim(),
@@ -19,8 +43,6 @@ const distanza = document.querySelector('.distanza');
 //     età: parseInt(age.value.trim()),
 //     distanza: parseInt(km.value.trim())
 // }
-
-
 let currentActive = 1;
 next.addEventListener('click', () => {
     currentActive++
@@ -123,3 +145,4 @@ function update() {
     // al click recupero i dati e if(determinate cose) non si avverano allora non si 
     // genera il biglietto
 }
+
