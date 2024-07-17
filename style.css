@@ -52,14 +52,6 @@
     margin-top: 20px;
 }
 
-/* .btn {
-    color: white;
-    background-color: blue;
-    padding: 5px 10px;
-    border-radius: 10%;
-    cursor: pointer;
-} */
-
 .btn:active {
     transform: scale(0.98);
 }
@@ -67,4 +59,8 @@
 .btn:disabled {
     background-color: lightgrey;
     cursor: not-allowed;
+}
+
+input {
+    border-radius: 5px;
 }

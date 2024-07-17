@@ -11,6 +11,7 @@ const età = document.querySelector('.età');
 const km = document.getElementById('km');
 const distanza = document.querySelector('.distanza');
 
+
 // PER QUANDO DEVO PRENDERE I VALORI DEGLI INPUT
 // const user = {
 //     nome: name.value.trim(),
@@ -106,4 +107,19 @@ function update() {
                 userClass.distanza.classList.remove('d-none')
             break;
     }
+
+
+    // const user = {
+    //     nome: name.value.trim(),
+    //     cognome: lastName.value.trim(),
+    //     età: parseInt(age.value.trim()),
+    //     distanza: parseInt(km.value.trim())
+    // }
+    // if (user.età < 7) {
+    //     errore.classList.remove('d-none')
+    //     errore.innerHTML = `Attenzione l'età deve essere superiore hai 7 anni`;
+    // }
+    // sono controlli da verificare al click del bottone che genera il biglietto 
+    // al click recupero i dati e if(determinate cose) non si avverano allora non si 
+    // genera il biglietto
 }
