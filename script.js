@@ -111,6 +111,12 @@ function update() {
     }
 }
 function loading(user) {
+    const numeroCarrozza = Math.floor(Math.random() * 5) + 1;
+    const numeroPosto = Math.floor(Math.random() * 30) + 1;
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f'];
+    let randomLetters = letters.sort(() => Math.random() - 0.5);
+    let userPosto = numeroPosto + randomLetters[0].toUpperCase();
+
     ticket.innerHTML += `
     <div class="card" style="width: 18rem;">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5LDz5NRMXX7EbAHN0g-72Dbqk-x_jHRTM9Q&s"
@@ -122,6 +128,8 @@ function loading(user) {
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><strong>${user.nome}</strong> <strong>${user.cognome}</strong></li>
+        <li class="list-group-item">NUMERO CARROZZA: <strong>${numeroCarrozza}</strong></li>
+        <li class="list-group-item">POSTO A SEDERE: <strong>${userPosto}</strong></li>
         <li class="list-group-item">COSTO DEL BIGLIETTO</li>
     </ul>
 </div>
@@ -139,7 +147,6 @@ function loading(user) {
         bg.style.filter = `blur(${scale(load, 0, 100, 50, 0)}px)`;
     }
 }
-
 function generateTickets() {
     const user = {
         nome: name.value.trim(),
@@ -168,7 +175,7 @@ buttonValidation.addEventListener('click', function () {
     generateTickets()
 });
 
-
+// AGGIUNGERE FUNZIONE PER IL COSTO DEL BIGLIETTO
 
 
 
