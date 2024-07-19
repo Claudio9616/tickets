@@ -13,36 +13,12 @@ const age = document.getElementById('age');
 const età = document.querySelector('.età');
 const km = document.getElementById('km');
 const distanza = document.querySelector('.distanza');
+const buttonValidation = document.querySelector('.button-validation');
+const error = document.querySelector('.error');
+let ticket = document.querySelector('.ticket');
 function scale(number, inMin, inMax, outMin, outMax) {
     return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
-function loading() {
-    let load = 0;
-    let intervall = setInterval(bluring, 30);
-    function bluring() {
-        bg.classList.remove('d-none')
-        load++;
-        if (load > 99) {
-            clearInterval(intervall);
-        }
-        loadText.innerHTML = `${load}%`
-        loadText.style.opacity = scale(load, 0, 100, 1, 0);
-        bg.style.filter = `blur(${scale(load, 0, 100, 50, 0)}px)`;
-    }
-}
-
-generateTicket.addEventListener('click', function () {
-    loading();
-    // una volta raccolti i valori degli input fai le verifiche e metti gli eventuali errori
-    // degli utenti
-})
-// PER QUANDO DEVO PRENDERE I VALORI DEGLI INPUT
-// const user = {
-//     nome: name.value.trim(),
-//     cognome: lastName.value.trim(),
-//     età: parseInt(age.value.trim()),
-//     distanza: parseInt(km.value.trim())
-// }
 let currentActive = 1;
 next.addEventListener('click', () => {
     currentActive++
@@ -72,10 +48,13 @@ function update() {
         prev.disabled = true;
         prev.classList.remove('text-white', 'bg-primary');
         prev.classList.add('text-black', 'bg-secondary');
+        buttonValidation.classList.add('d-none');
     } else if (currentActive === circles.length) {
         next.disabled = true;
         next.classList.add('text-black', 'bg-secondary');
         next.classList.remove('text-white', 'bg-primary');
+        buttonValidation.classList.remove('d-none');
+
     } else {
         next.disabled = false;
         prev.disabled = false;
@@ -83,6 +62,7 @@ function update() {
         next.classList.remove('text-black', 'bg-secondary');
         prev.classList.add('text-white', 'bg-primary');
         prev.classList.remove('text-black', 'bg-secondary');
+        buttonValidation.classList.add('d-none');
     }
     const userClass = {
         nome, cognome, età, distanza
@@ -129,20 +109,66 @@ function update() {
                 userClass.distanza.classList.remove('d-none')
             break;
     }
-
-
-    // const user = {
-    //     nome: name.value.trim(),
-    //     cognome: lastName.value.trim(),
-    //     età: parseInt(age.value.trim()),
-    //     distanza: parseInt(km.value.trim())
-    // }
-    // if (user.età < 7) {
-    //     errore.classList.remove('d-none')
-    //     errore.innerHTML = `Attenzione l'età deve essere superiore hai 7 anni`;
-    // }
-    // sono controlli da verificare al click del bottone che genera il biglietto 
-    // al click recupero i dati e if(determinate cose) non si avverano allora non si 
-    // genera il biglietto
 }
+function loading(user) {
+    ticket.innerHTML += `
+    <div class="card" style="width: 18rem;">
+    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5LDz5NRMXX7EbAHN0g-72Dbqk-x_jHRTM9Q&s"
+        class="card-img-top" alt="train">
+    <div class="card-body">
+        <h5 class="card-title text-center">Buon Viaggio</h5>
+        <p class="card-text">Gentile <strong>${user.nome}</strong> goditi il tuo viaggio
+            in tutta tranquillità, usufruendo dei nostri servizi</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item"><strong>${user.nome}</strong> <strong>${user.cognome}</strong></li>
+        <li class="list-group-item">COSTO DEL BIGLIETTO</li>
+    </ul>
+</div>
+    `;
+    let load = 0;
+    let intervall = setInterval(bluring, 30);
+    function bluring() {
+        bg.classList.remove('d-none');
+        load++;
+        if (load > 99) {
+            clearInterval(intervall);
+        }
+        loadText.innerHTML = `${load}%`
+        loadText.style.opacity = scale(load, 0, 100, 1, 0);
+        bg.style.filter = `blur(${scale(load, 0, 100, 50, 0)}px)`;
+    }
+}
+
+function generateTickets() {
+    const user = {
+        nome: name.value.trim(),
+        cognome: lastName.value.trim(),
+        età: parseInt(age.value.trim()),
+        distanza: parseInt(km.value.trim())
+    }
+    if (isNaN(user.età) || user.età <= 5 || isNaN(user.distanza) || !user.cognome || !user.nome) {
+        error.classList.remove('d-none');
+        error.innerHTML = `<ul>
+        <li><strong>I DATI INSERITI NON SONO CORRETTI SI PREGA DI CONTROLLARE</strong></li>
+        <li>NOME: <strong>${user.nome}</strong> </li>
+        <li>COGNOME: <strong>${user.cognome}</strong> </li>
+        <li>ETA': <strong style="color: red;">(si ricorda che i miori sotti i 5 anni non posso viaggiare)</strong> <strong>${user.età}</strong> </li>
+        <li>DISTANZA: <strong>${user.distanza}</strong> </li>
+        </ul>`
+    } else {
+        error.classList.add('d-none');
+        generateTicket.classList.remove('d-none')
+        generateTicket.addEventListener('click', function () {
+            loading(user);
+        })
+    }
+}
+buttonValidation.addEventListener('click', function () {
+    generateTickets()
+});
+
+
+
+
 
