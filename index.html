@@ -24,19 +24,19 @@
             <div class="section-form mt-3">
                 <div class="nome">
                     <label for="name">Inserisci il Nome</label>
-                    <input type="text" id="name" placeholder="Nome">
+                    <input autofocus type="text" id="name" placeholder="Nome">
                 </div>
                 <div class="d-none cognome">
                     <label for="last-name">Inserisci il Cognome</label>
-                    <input type="text" id="last-name" placeholder="Cognome">
+                    <input autofocus type="text" id="last-name" placeholder="Cognome">
                 </div>
                 <div class="d-none età">
                     <label for="age">Inserisci gli Anni</label>
-                    <input type="number" min="" max="100" id="age" placeholder="Età">
+                    <input autofocus type="number" min="" max="100" id="age" placeholder="Età">
                 </div>
                 <div class="d-none distanza">
                     <label for="km">Inserisci quanti Km vuoi percorre</label>
-                    <input type="number" min="1" id="km" placeholder="Km">
+                    <input autofocus type="number" min="1" id="km" placeholder="Km">
                 </div>
             </div>
             <div class="progress-container d-flex justify-content-center align-items-center mt-3 gap-3">
@@ -58,6 +58,7 @@
     <main>
         <div class="container">
             <div class="error d-none text-center"></div>
+            <div class="success"></div>
             <button class="generate-ticket d-none btn border border-danger">GENERA BIGLIETTO</button>
             <div class="bg d-none">
                 <div class="ticket"></div>
