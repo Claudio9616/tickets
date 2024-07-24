@@ -1,0 +1,19 @@
+.faq .faq-answer {
+    display: none;
+}
+
+.faq.active .faq-answer {
+    display: block;
+}
+
+.btn .fa-xmark {
+    display: none;
+}
+
+.faq.active .btn .fa-xmark {
+    display: block;
+}
+
+.faq.active .btn .fa-angle-down {
+    display: none;
+}
