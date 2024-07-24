@@ -15,11 +15,13 @@ const km = document.getElementById('km');
 const distanza = document.querySelector('.distanza');
 const buttonValidation = document.querySelector('.button-validation');
 const error = document.querySelector('.error');
+const success = document.querySelector('.success');
 let ticket = document.querySelector('.ticket');
+const header = document.querySelector('header');
+let currentActive = 1;
 function scale(number, inMin, inMax, outMin, outMax) {
     return (number - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
 }
-let currentActive = 1;
 next.addEventListener('click', () => {
     currentActive++
     if (currentActive > circles.length) {
@@ -111,6 +113,21 @@ function update() {
     }
 }
 function loading(user) {
+    generateTicket.classList.add('d-none');
+    const numeroCarrozza = Math.floor(Math.random() * 5) + 1;
+    const numeroPosto = Math.floor(Math.random() * 30) + 1;
+    const letters = ['a', 'b', 'c', 'd', 'e', 'f'];
+    let randomLetters = letters.sort(() => Math.random() - 0.5);
+    let userPosto = numeroPosto + randomLetters[0].toUpperCase();
+    const fixedPrice = 0.40;
+    let totalPrice = fixedPrice * user.distanza;
+    let discount = 0.20;
+    if (user.età <= 17) {
+        totalPrice -= (totalPrice * discount);
+    } else if (user.età >= 65) {
+        discount = 0.40;
+        totalPrice -= (totalPrice * discount);
+    }
     ticket.innerHTML += `
     <div class="card" style="width: 18rem;">
     <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ5LDz5NRMXX7EbAHN0g-72Dbqk-x_jHRTM9Q&s"
@@ -122,7 +139,9 @@ function loading(user) {
     </div>
     <ul class="list-group list-group-flush">
         <li class="list-group-item"><strong>${user.nome}</strong> <strong>${user.cognome}</strong></li>
-        <li class="list-group-item">COSTO DEL BIGLIETTO</li>
+        <li class="list-group-item">NUMERO CARROZZA: <strong>${numeroCarrozza}</strong></li>
+        <li class="list-group-item">POSTO A SEDERE: <strong>${userPosto}</strong></li>
+        <li class="list-group-item">COSTO DEL BIGLIETTO: <strong>${totalPrice.toFixed(2)}</strong></li>
     </ul>
 </div>
     `;
@@ -139,7 +158,6 @@ function loading(user) {
         bg.style.filter = `blur(${scale(load, 0, 100, 50, 0)}px)`;
     }
 }
-
 function generateTickets() {
     const user = {
         nome: name.value.trim(),
@@ -147,25 +165,29 @@ function generateTickets() {
         età: parseInt(age.value.trim()),
         distanza: parseInt(km.value.trim())
     }
-    if (isNaN(user.età) || user.età <= 5 || isNaN(user.distanza) || !user.cognome || !user.nome) {
+    if (isNaN(user.età) || user.età <= 5 || isNaN(user.distanza) || !user.cognome || !user.nome || !isNaN(user.nome) || !isNaN(user.nome)) {
         error.classList.remove('d-none');
         error.innerHTML = `<ul>
         <li><strong>I DATI INSERITI NON SONO CORRETTI SI PREGA DI CONTROLLARE</strong></li>
-        <li>NOME: <strong>${user.nome}</strong> </li>
-        <li>COGNOME: <strong>${user.cognome}</strong> </li>
-        <li>ETA': <strong style="color: red;">(si ricorda che i miori sotti i 5 anni non posso viaggiare)</strong> <strong>${user.età}</strong> </li>
-        <li>DISTANZA: <strong>${user.distanza}</strong> </li>
+        <li>NOME: <strong>${user.nome || 'nessun NOME inserito'}</strong> </li>
+        <li>COGNOME: <strong>${user.cognome || 'nessun COGNOME inserito'}</strong> </li>
+        <li>ETA': <strong style="color: red;">(si ricorda che i minori sotti i 5 anni non posso viaggiare)</strong> <strong>${user.età || `nessuna ETA' inserita`}</strong> </li>
+        <li>DISTANZA: <strong>${user.distanza || 'dati inseriti SCORRETTAMENTE'}</strong> </li>
         </ul>`
     } else {
+        let messageSucces = 'DATI INSERITI CORRETTAMENTE';
+        success.append(messageSucces);
         error.classList.add('d-none');
-        generateTicket.classList.remove('d-none')
+        buttonValidation.classList.add('d-none');
+        header.classList.add('d-none');
+        generateTicket.classList.remove('d-none');
         generateTicket.addEventListener('click', function () {
             loading(user);
         })
     }
 }
 buttonValidation.addEventListener('click', function () {
-    generateTickets()
+    generateTickets();
 });
 
 
