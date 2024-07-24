@@ -19,16 +19,60 @@
 </head>
 
 <body>
-    <footer>
+    <header>
+        <div class="container-fluid d-flex justify-content-center align-items-center flex-column">
+            <div class="section-form mt-3">
+                <div class="nome">
+                    <label for="name">Inserisci il Nome</label>
+                    <input autofocus type="text" id="name" placeholder="Nome">
+                </div>
+                <div class="d-none cognome">
+                    <label for="last-name">Inserisci il Cognome</label>
+                    <input autofocus type="text" id="last-name" placeholder="Cognome">
+                </div>
+                <div class="d-none età">
+                    <label for="age">Inserisci gli Anni</label>
+                    <input autofocus type="number" min="" max="100" id="age" placeholder="Età">
+                </div>
+                <div class="d-none distanza">
+                    <label for="km">Inserisci quanti Km vuoi percorre</label>
+                    <input autofocus type="number" min="1" id="km" placeholder="Km">
+                </div>
+            </div>
+            <div class="progress-container d-flex justify-content-center align-items-center mt-3 gap-3">
+                <div class="progresss" id="progress"></div>
+                <div class="circle active">1</div>
+                <div class="circle">2</div>
+                <div class="circle">3</div>
+                <div class="circle">4</div>
+            </div>
+            <div class="button">
+                <button class="btn text-black bg-secondary" id="prev" disabled>Prev</button>
+                <button class="btn text-white bg-primary" id="next">Next</button>
+            </div>
+            <div class="button-validation d-none">
+                <button class="btn">CONTROLLA I DATI</button>
+            </div>
+        </div>
+    </header>
+    <main>
+        <div class="container">
+            <div class="error d-none text-center"></div>
+            <div class="success"></div>
+            <button class="generate-ticket d-none btn border border-danger">GENERA BIGLIETTO</button>
+            <div class="bg d-none">
+                <div class="ticket"></div>
+            </div>
+            <div class="loading-text">0%</div>
+        </div>
+    </main>
+   <footer>
         <div class="container">
             <h3 class="text-center">ECCO ALCUNE DELLE DOMANDE PIU' FREQUENTI</h3>
             <h1 class="mb-5 text-center">F.A.Q</h1>
             <div class="content position-relative">
             </div>
         </div>
-        <!-- AGGIUNGERE FOOTER CON LA FAQ COLLAPSE -->
-        <!-- SPECIFICARE CHE TUTTO QUANTO è STATO FATTO USANDO JS PLAIN 'ANCHE LE FAQ COLLAPSE'
-    MAGARI DICI PURE CHE BOOTSTRAP è STATO USATO SOLO PER LO STILE E SCRIVVERE DI MENO -->
     </footer>
     <script src="script.js"></script>
     <!-- SCRIPT FOR AOS -->
